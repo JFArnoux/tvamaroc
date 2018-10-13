@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+            <!--Tree view types liasse fiscal-->
+            <record model="ir.ui.view" id="type_liasse_tree_view">
+                <field name="name">type.liasse.tree</field>
+                <field name="model">type.liasse</field>
+                <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="tree_string">
+                        <field name="name"/>
+                        <field name="identifiant"/>
+                        <field name="type"/>
+                    </tree>
+                </field>
+            </record>
+            
+			<!--form view-->
+            <record model="ir.ui.view" id="type_liasse_form_view">
+                <field name="name">type.liasse.form</field>
+                <field name="model">type.liasse</field>
+                <field name="type">form</field>
+                <field name="arch" type="xml">
+                    <form string="form_string">
+                     <sheet>
+                    	<group>
+	                    	<group>
+	                    		<field name="name"/>
+	                    		<field name="identifiant"/>
+	                    	</group>
+	                    	<group>
+	                    		<field name="type"/>
+	                    	</group>
+                    	</group>
+                    </sheet>
+                   </form>
+                </field>
+            </record>
+			
+			<!-- Action view-->
+            <record model="ir.actions.act_window" id="type_liasse_action_view">
+                <field name="name">Type liasse</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">type.liasse</field>
+                <field name="view_type">form</field>
+                <field name="view_mode">tree,form</field>
+            </record>
+			
+			<menuitem id="type_liasse_menu" name="Types de liasse fiscale" parent="account.account_account_menu" action="type_liasse_action_view"/>
+
+           <!--Tree view types payment.mode-->
+            <record model="ir.ui.view" id="payment_mode_tree_view">
+                <field name="name">payment.mode.tree</field>
+                <field name="model">payment.mode</field>
+                <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="Modes">
+	                    <field name="name"/>
+	                    <field name="partner_def"/>
+	                    <field name="expense_def"/>
+	                    <field name="code"/>
+	                    <field name="supplier_def"/>
+	                    <field name="prohibit"/>
+                    </tree>
+                </field>
+            </record>
+            
+			<!--form view-->
+            <record model="ir.ui.view" id="payment_mode_form_view">
+                <field name="name">payment.mode.form</field>
+                <field name="model">payment.mode</field>
+                <field name="type">form</field>
+                <field name="arch" type="xml">
+                    <form string="Modes">
+                     <sheet>
+                    	<group>
+	                    	<group>
+	                    		<field name="name"/>
+	                    		<field name="partner_def"/>
+	                    		<field name="expense_def"/>
+	                    	</group>
+	                    	<group>
+	                    		<field name="code"/>
+	                    		<field name="supplier_def"/>
+	                    		<field name="prohibit"/>
+	                    	</group>
+                    	</group>
+                    </sheet>
+                   </form>
+                </field>
+            </record>
+			
+			<!-- Action view-->
+            <record model="ir.actions.act_window" id="payment_mode_action_view">
+                <field name="name">Modes de paiements</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">payment.mode</field>
+                <field name="view_type">form</field>
+                <field name="view_mode">tree,form</field>
+            </record>
+			
+			<menuitem id="payment_mode_menu" name="Modes de paiements" parent="account.account_account_menu" action="payment_mode_action_view"/>
+
+
+            <!--Tree view tax group-->
+            <record model="ir.ui.view" id="tax_group_tree_view">
+                <field name="name">account.tax.group.tree</field>
+                <field name="model">account.tax.group</field>
+                <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="Tax group">
+                        <field name="name"/>
+                        <field name="sequence"/>
+                    </tree>
+                </field>
+            </record>
+            
+			<!--form view-->
+            <record model="ir.ui.view" id="tax_group_form_view">
+                <field name="name">account.tax.group.form</field>
+                <field name="model">account.tax.group</field>
+                <field name="type">form</field>
+                <field name="arch" type="xml">
+                    <form string="Tax group">
+                     <sheet>
+                    	<group>
+	                    	<group>
+	                    		<field name="name"/>
+	                    	</group>
+	                    	<group>
+	                    		<field name="sequence"/>
+	                    	</group>
+                    	</group>
+                    </sheet>
+                   </form>
+                </field>
+            </record>
+			
+			<!-- Action view-->
+            <record model="ir.actions.act_window" id="tax_group_action_view">
+                <field name="name">Groupe de taxe</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">account.tax.group</field>
+                <field name="view_type">form</field>
+                <field name="view_mode">tree,form</field>
+            </record>
+			
+			<menuitem id="tax_group_menu" name="Groupe de taxe" parent="account.account_account_menu" action="tax_group_action_view"/>
+
+                                             		
+</odoo>

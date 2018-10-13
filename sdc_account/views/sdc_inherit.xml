@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+			<!-- res company inherit -->
+            <record model="ir.ui.view" id="company_inherit_form_view">
+                <field name="name">res.company.form.inherit</field>
+                <field name="model">res.company</field>
+                <field name="type">form</field>
+                <field name="inherit_id" ref="base.view_company_form"/>
+                <field name="arch" type="xml">
+                <notebook position="inside">
+	                    <page string='Administratif et fiscal'>
+		                   <group>
+		                    <group string="Identifications administratifs">
+		                    	<field name="idf"/>
+		                    	<field name="rc" />
+		                    	<field name="tc"/>
+		                    	<field name="itp"/>
+		                    	<field name="ice" />
+		                    	<field name="cnss" />
+		                    	<field name="idfp"/>
+		                    </group>
+		                    <group string="Informations déclarations fiscales">
+		                    	<field name="drp" />
+		                    	<field name="subdivision" />
+		                    	<field name="code_dr" />
+		                    	<field name="recette" />
+		                    	<field name="code_recette" />
+		                    	<field name="regim_tva" />
+		                    	<field name="fait_tva" />
+		                    	<field name="type_lf" />
+		                    	<field name="invoice_description" />
+		                    </group>
+		                   </group>
+	                    </page>  	
+                   </notebook>
+ 
+		    		<xpath expr="//field[@name='partner_id']" position="after">
+		            	<field name="raison_s"/>
+		            </xpath>
+		    		<xpath expr="//field[@name='report_header']" position="after">
+		            	<field name="fj"/>
+		            	<field name="adresse_siege"/>
+		            	<field name="city_id"/>
+		            </xpath>		            
+	
+                </field>
+            </record>
+
+
+			<!-- res.partner inherit -->
+           <record model="ir.ui.view" id="partner_ste_inherit_form_view">
+                <field name="name">res.partner.form.inherit.if</field>
+                <field name="model">res.partner</field>
+                <field name="type">form</field>
+                <field name="inherit_id" ref="base.view_partner_form"/>
+                <field name="arch" type="xml">      
+	    		<xpath expr="//page[@name='internal_notes']" position="after" attrs="{'invisible':[('company_type','operator','='person')]}">
+	            	<page string='Identifiants'>
+	            		<group>
+		                    <group>
+		                    	<field name="rc"/>
+		                    	<field name="tc"/>
+		                    	<field name="ifs" />
+		                    </group>
+		                    <group>
+		                    	<field name="patente" />
+		                    	<field name="ice"/>
+		                    </group>
+		                </group>
+	            	</page>
+	            </xpath>
+		            	            
+	            <xpath expr="//page[@name='sales_purchases']//field[@name='supplier']" position="after">
+		           <field name="description_facture"/>
+		        </xpath>
+		           
+                </field>
+            </record>
+            
+ 			<!-- account.invoice inherit -->
+           <record model="ir.ui.view" id="account_invoice_tva_inherit_form_view">
+                <field name="name">account.invoice.form.inherit.if</field>
+                <field name="model">account.invoice</field>
+                <field name="type">form</field>
+                <field name="inherit_id" ref="account.invoice_form"/>
+                <field name="arch" type="xml">             	            
+		            <xpath expr="//page[@name='other_info']//field[@name='name']" position="after">
+			           <field name="description_facture"/>
+			        </xpath>  
+                </field>
+            </record>
+
+ 			<!-- purchase.order inherit -->
+           <record model="ir.ui.view" id="purchase_order_tva_inherit_form_view">
+                <field name="name">purchase.order.form.inherit.tva</field>
+                <field name="model">purchase.order</field>
+                <field name="type">form</field>
+                <field name="inherit_id" ref="purchase.purchase_order_form"/>
+                <field name="arch" type="xml">             	            
+		            <xpath expr="//field[@name='payment_term_id']" position="after">
+			           <field name="description_facture"/>
+			        </xpath>  
+                </field>
+            </record>
+		
+		<!-- inherit account.payment -->
+        <record model="ir.ui.view" id="account_payment_tva_pop_view">
+                <field name="name">account.payment.tva.view</field>
+                <field name="model">account.payment</field>
+                <field name="inherit_id" ref="account.view_account_payment_invoice_form"/>
+                <field name="arch" type="xml">
+                    <field name="communication" position="after">
+                        <field name="payment_mode" widget="selection"/>
+                        <field name="deadline"/>
+                        <field name="number"/>
+                    </field>
+                </field>
+        </record>
+        
+        <!-- inherit account.payment -->
+        <record model="ir.ui.view" id="account_payment_tva_view">
+                <field name="name">account.payment.tva.view</field>
+                <field name="model">account.payment</field>
+                <field name="inherit_id" ref="account.view_account_payment_form"/>
+                <field name="arch" type="xml">
+                    <field name="communication" position="after">
+                        <field name="payment_mode" widget="selection"/>
+                        <field name="deadline"/>
+                        <field name="number"/>
+                    </field>
+                </field>
+        </record>
+ 
+        <!-- inherit account.payment -->
+        <record model="ir.ui.view" id="hr_expense_tva_view">
+                <field name="name">hr.expense.sheet.register.payment.wizard.tva.view</field>
+                <field name="model">hr.expense.sheet.register.payment.wizard</field>
+                <field name="inherit_id" ref="hr_expense.hr_expense_sheet_register_payment_view_form"/>
+                <field name="arch" type="xml">
+                    <field name="communication" position="after">
+                        <field name="payment_mode" widget="selection"/>
+                        <field name="number"/>
+                    </field>
+                </field>
+        </record>
+
+        <!-- inherit account.tax -->
+        <record model="ir.ui.view" id="account_tax_tva_tree_view">
+                <field name="name">account.tax.tva.view</field>
+                <field name="model">account.tax</field>
+                <field name="inherit_id" ref="account.view_tax_tree"/>
+                <field name="arch" type="xml">
+                    <field name="description" position="after">
+                        <field name="code_dgi"/>
+                        <field name="teype_vent"/>
+                    </field>
+                </field>
+        </record>
+        
+        <!-- inherit account.tax -->
+        <record model="ir.ui.view" id="account_tax_tva_form_view">
+                <field name="name">account.tax.tva.view</field>
+                <field name="model">account.tax</field>
+                <field name="inherit_id" ref="account.view_tax_form"/>
+               	<field name="arch" type="xml">
+		    		<xpath expr="//field[@name='amount_type']" position="after">
+		            	<field name="code_dgi"/>
+		            	<field name="teype_vent"/>
+		            </xpath>
+			    	<xpath expr="//field[@name='tag_ids']" position="after">
+		            	<field name="type_tva"/>
+		            	<field name="impact_tva"/>
+		            </xpath>   
+		         </field>
+        </record>
+		
+		<!-- product.template inherir tva -->
+        <record id="product_template_tva_form_view" model="ir.ui.view">
+            <field name="name">product.template.form.tva.inherit</field>
+            <field name="model">product.template</field>
+            <field name="priority">5</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+               	<xpath expr="//field[@name='taxes_id']" position="after">
+		            <field name="teype_vent"/>
+		        </xpath> 
+            </field>
+        </record>
+                                                                                               
+</odoo>

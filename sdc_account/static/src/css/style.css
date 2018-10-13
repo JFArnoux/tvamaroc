@@ -1,0 +1,98 @@
+/* Services theme 3*/
+.serviceBox{
+    margin-top: 50px;
+    border-bottom: 1px solid #c2c2c2;
+    z-index: 1;
+    position: relative;
+    top: 0;
+    transition: all 0.3s ease 0s;
+}
+.serviceBox:hover{
+    top: -20px;
+    border-bottom: 1px solid #58a4b0;
+}
+.serviceBox:after{
+    content: "";
+    width: 2px;
+    height: 100%;
+    background: #c2c2c2;
+    position: absolute;
+    bottom: 0;
+    left: 37.5px;
+    z-index: -1;
+    transition: all 0.3s ease 0s;
+}
+.serviceBox:hover:after{
+    background: #58a4b0;
+}
+.serviceBox .service-icon{
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background: #fff;
+    border: 5px solid #c2c2c2;
+    text-align: center;
+    line-height: 70px;
+    float: left;
+    font-size: 40px;
+    color: #c2c2c2;
+    z-index: 1;
+    transition: all 0.3s ease 0s;
+}
+.serviceBox:hover .service-icon{
+    border-color: #58a4b0;
+    color: #58a4b0;
+    margin-top: -30px;
+    animation: bounce 1s ease normal none 1;
+}
+.serviceBox .service-content{
+    margin-left: 90px;
+    padding-bottom: 70px;
+}
+.serviceBox .title{
+    font-size: 20px;
+    color: #222;
+    margin-top: 0;
+}
+.serviceBox .description{
+    font-size: 16px;
+    color: #444;
+    line-height: 24px;
+}
+.serviceBox .read-more{
+    display: inline-block;
+    padding: 4px 16px;
+    font-size: 13px;
+    color: #58a4b0;
+    text-transform: capitalize;
+    border: 2px solid #58a4b0;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    transition: all 0.3s ease 0s;
+}
+.serviceBox:hover .read-more{
+    bottom: 25px;
+    opacity: 1;
+}
+.serviceBox .read-more:hover{
+    background: #58a4b0;
+    color: #fff;
+}
+@keyframes bounce{
+    0%{ transform:scale(1.8) }
+    50%{ transform:scale(0.95) }
+    80%{ transform:scale(1.05) }
+    90%{ transform:scale(0.98) }
+    100%{ transform:scale(1) }
+}
+@media only screen and (max-width:990px){
+    .serviceBox{ margin-bottom: 20px; }
+}
+@media only screen and (max-width:767px){
+    .serviceBox{ margin-bottom: 70px; }
+}
+

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_template_sale_order">
+    <t t-call="web.external_layout">
+        <t t-foreach="docs" t-as="doc">
+        <div class="page">
+            <div class="oe_structure"/> 
+             <div class="row">
+                     	<style>
+							.borderless td, .borderless th {
+							    border: none;
+							}
+				        </style>
+				
+				<div class="col-xs-6 pull-right">
+        			<strong><h3>Offre d'affichage</h3></strong>
+        		</div>
+        		
+				<table class="table borderless">
+				  <tr>
+				    <td ><strong>A l'anttention de : </strong><span t-field="doc.partner_id"/></td>
+				    <td ></td>
+				    <td class="col-xs-6 pull-right"><strong>Date : </strong><span t-field="doc.date_order" t-field-options='{"format": "dd/MM/yyyy"}'/></td>
+				 </tr>
+				  <tr>
+				  	<td ><strong>N° de client : </strong><span t-field="doc.partner_id.property_account_receivable_id.code"/></td>
+				  	<td ></td>
+				    <td ><strong>Offre N° : </strong><span t-field="doc.name"/></td>
+				    
+				 </tr>
+				  <tr>
+				  	<td >Campagne : <span t-field="doc.compagne"/></td>
+				  	<td ></td>
+				  	<td >Devis valide jusqu'au : <span t-field="doc.validity_date"/></td>
+				  </tr>
+				  <tr>
+				  	<td ></td>
+				  	<td ></td>
+				  	<td >Période demandée : <span t-field="doc.periode"/></td>
+				  </tr>
+				</table>
+			</div>
+			
+			<table class="table table-condensed">
+				<tr class="success">
+					<td ><strong>Choix d'affichage : </strong><span t-field="doc.display"/></td>
+	            </tr>
+            </table>
+            <b/>
+            <!-- Is there a discount on at least one line? -->
+            <t t-set="display_discount" t-value="any([l.discount for l in doc.order_line])"/>
+            <t t-foreach="doc.order_lines_layouted()" t-as="page">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Adresse</th>
+                            <th>L</th>
+                            <th>H</th>
+                            <th>Surf</th>
+                            <th>Disponibilité</th>
+                            <th class="text-center">Du</th>
+                            <th class="text-center">Au</th>
+                            <th class="text-center">Nbre mois</th>
+                            <th class="text-center">Prix unitaire</th>
+                            <th class="text-center">Comm. Agence</th>
+                            <th t-if="display_discount" class="text-right" groups="sale.group_discount_per_so_line">Disc.(%)</th>
+                            <th class="text-center" groups="sale.group_show_price_subtotal">PU HT comm. incluse</th>
+                            <th class="text-right price_tax_included" groups="sale.group_show_price_total">PU HT Comm</th>
+                        </tr>
+                   </thead>
+                   <tbody class="sale_tbody">
+                        <t t-foreach="page" t-as="layout_category">
+
+                            <t t-if="layout_category_size > 1 or page_size > 1" groups="sale.group_sale_layout">
+                                <tr class="active">
+                                    <td colspan="12" style="font-weight: bold; border-bottom: 1px solid black;">&amp;bull;
+                                        <t t-esc="layout_category['name']"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <!-- Lines associated -->
+                            <t t-foreach="layout_category['lines']" t-as="l">
+                                <tr>
+                                    <td><span t-field="l.name"/></td>
+                                    <td><span t-field="l.adresse"/></td>
+                                    <td><span t-field="l.largeur"/></td>
+                                    <td><span t-field="l.hauteur"/></td>
+                                    <td><span t-field="l.area"/></td>
+	                                <td><t t-if="not l.vailable">
+										  Immédiate
+										</t>
+										<t t-else="">
+										  <span t-field="l.vailable"/>
+										</t>
+									</td>
+                                
+                                    <td class="text-center"><span t-field="l.du"/></td>
+                                    <td class="text-center"><span t-field="l.au"/></td>
+                                    <td class="text-center"><span t-field="l.month_nbr"/></td>
+                                    <td class="text-right">
+                                        <span t-field="l.price_unit"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <!-- <span t-esc="'%.2f'% l.comm_agence"/>-->
+                                        <span t-esc="l.comm_agence"/>%
+                                        <span t-field="l.product_uom" groups="product.group_uom"/>
+                                    </td>
+
+                                    <td t-if="display_discount" class="text-right" groups="sale.group_discount_per_so_line">
+                                        <span t-field="l.discount"/>
+                                    </td>
+                                    <td class="text-right" groups="sale.group_show_price_subtotal">
+                                        <span t-field="l.price_subtotal"
+                                            t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                                    </td>
+                                    <td class="text-right" groups="sale.group_show_price_total">
+                                        <span t-field="l.price_total"
+                                            t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-if="(layout_category_size > 1 or page_size > 1) and layout_category['subtotal']" groups="sale.group_sale_layout">
+                                <tr class="text-right">
+                                    <td colspan="14">
+                                        <strong>Sous Total: </strong>
+                                        <t t-set="subtotal" t-value="sum(line.price_subtotal for line in layout_category['lines'])"/>
+                                        <span t-esc="subtotal" t-options="{'widget': 'monetary', 'display_currency': doc.pricelist_id.currency_id}"/>
+                                    </td>
+                                </tr>
+                            </t>
+
+                        </t>
+                    </tbody>
+                </table>
+
+                <t t-if="page_index &lt; page_size - 1" groups="sale.group_sale_layout">
+                    <p style="page-break-before:always;"> </p>
+                </t>
+            </t>
+
+            <div class="clearfix">
+                <div class="row" name="total">
+                    <div class="col-xs-6 pull-right">
+                        <table class="table table-condensed" style="min-width: 200px;max-width: 350px;">
+                            <tr class="border-black" style="border-bottom:1px solid #dddddd;">
+                                <td><strong>Sous total HT</strong></td>
+                                <td class="text-right">
+                                    <span t-field="doc.amount_untaxed"
+                                        t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                                </td>
+                            </tr>
+                            <!-- tax -->
+                            <tr class="border-black" style="border-bottom:1px solid #dddddd;">
+                                <td><strong>TVA 20%</strong></td>
+                                <td class="text-right">
+                                    <span t-field="doc.amount_tax"
+                                        t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                                </td>
+                            </tr>
+
+                            <tr class="border-black">
+                                <td><strong>Total TTC</strong></td>
+                                <td class="text-right">
+                                    <span t-field="doc.amount_total"
+                                        t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <strong>Commentaires et instructions spéciales : </strong>
+            <p> Les prix indiqués dans cette offre sont confidentiels.</p>
+            <p>Ils incluent la location des espaces sélectionnés, l'impression, la pose et la dépose d'un visuel par site.</p>
+            <p t-field="doc.note" />
+            <p t-if="doc.payment_term_id.note">
+                <span t-field="doc.payment_term_id.note"/>
+            </p>
+            <p id="fiscal_position_remark" t-if="doc.fiscal_position_id and doc.fiscal_position_id.note">
+                <strong>Fiscal Position Remark:</strong>
+                <span t-field="doc.fiscal_position_id.note"/>
+            </p>
+            <div class="oe_structure"/>
+        
+        
+	       <!--Conditions  -->
+	       <div style="font-size:10px">   
+	        <p style="page-break-after:always;"></p>
+	   		<p><center><strong>Conditions Générales de ventes</strong></center></p><br/>
+	   		
+	   		<center>AXO TOP MÉDIA, SA au capital de 6 000 000 DHS, spécialisée dans l’affichage publicitaire, dont le siège social est situé au 14, rue Abou Ali Ben Rahal – 20050 - Casablanca -  immatriculée au R.C. de Casablanca sous le n°95073
+	   		</center><b/>
+	   		<strong>GÉNÉRALITÉS </strong><br/>
+			<p align="justify">Nos ventes et prestations sont soumises aux présentes conditions générales. En conséquence, le seul fait de traiter avec notre société vaut acceptation de nos conditions générales de ventes qui prévalent sur toutes autres conditions générales d’achat de l’acheteur sauf dérogation expresse de notre part.
+			</p>
+			<strong>OFFRE, PASSATION DE CONTRAT DE VENTE </strong><br/>
+			<p align="justify">Sauf déclaration expresse contraire, les offres de prix d’Axo Top Média restent valables pour une durée maximale d’un (1) an. Les commandes ou les affichages ne lient Axo Top Média qu’après confirmation de commande écrite via contrat, bon de commande ou affichage. Dans ce dernier cas, la facture se substitue à la confirmation de commande.
+			<br/>
+			Annulation : dans le cas ou Axo Top Média accepte l’annulation d’une prestation, elle se réserve le droit de facturer les frais occasionnés.
+	   		</p>	
+	   		<strong>PRIX ET MODALITÉS DE PAIEMENT</strong><br/>
+	   		<p align="justify">
+			Sauf stipulation contraire, les prix s’entendent hors taxes et hors commission. Les prix peuvent varier suite à des changements de sites ou de coûts de matière premières. Ces prix sont confidentiels et leurs montants sont précisés dans des conditions particulières.
+			Toutes les commandes, sauf stipulation contraire, sont payables à Casablanca suivant un barème précédemment établi par nos services. Le règlement des factures ne pourra excéder quatre-vingt-dix (90) jours après réception. Tout manquement aux conditions de règlement convenus donnera lieu à une pénalité égale à un pourcents (1%) des montants dus par mois de retard, tout mois entamé étant dû. A défaut de paiement d’un solde dû à son échéance, Axo Top Média se réserve le droit sous huit (8) jours de résilier et de retirer si bon lui semble, le dispositif publicitaire installé par lui et ce, après une simple mise en demeure par lettre recommandée. De plus, Axo Top Média se réserve le droit de poursuivre le Client en paiement de ce qui lui serait dû au moment de la résiliation, ceci sans préjudice de tout dommage et intérêts. 
+			</p>
+			<strong>ENGAGEMENTS DU PRESTATAIRE</strong><br/>
+			Axo Top Média dispose des délais suivant pour la pose des visuels :
+			<ul>
+				<ul>
+			         <li>Casablanca : au plus tard, quarante-huit heures (48) après la validation du BAT</li>
+			         <li>Hors Casablanca : au plus tard, quatre jours (4) après la validation du BAT.</li>
+			    </ul>
+	        </ul>
+	        <p align="justify">
+	        Le paiement des loyers, des taxes, des assurances, de la consommation électrique et de toutes les charges en relation avec ses sites sont à la charge d’Axo Top Média. 
+			Axo Top Média traite directement avec le(s) propriétaire(s) des emplacements. En cas de litige dont il pourrait avoir connaissance, le Client s’engage formellement à ne pas intervenir directement avec le(s) propriétaire(s) et à en informer immédiatement Axo Top Média qui se verra seul en charge du règlement du dit litige.
+			Axo Top Média se charge d’effectuer les démarches nécessaires auprès des autorités compétentes afin d’obtenir les autorisations officielles à des fins d’affichage.
+			Axo Top Média est en charge de la négociation ainsi que du paiement des taxes communales en vigueur. Ces derniers restent à la charge d’Axo Top Média et seront reportées sur la redevance annuelle versée par le Client.
+			L’objet de l’abonnement étant uniquement un service publicitaire et non une location d’un emplacement ou d’un espace, l’accès aux lieux d’affichage sont exclusivement réservés à Axo Top Média et/ou à ses représentants. 
+			Axo Top Média reste seul maître des lieux sur lesquels il exerce son activité par lui-même ou par l’entremise de ses représentants (employés et/ou sous-traitants). De ce fait, le Client ne peut se prévaloir d’aucune priorité de renouvèlement sans l’accord exprès d’Axo Top Média.
+			Axo Top Média effectuera l’intégralité des travaux nécessaires à l’installation et au bon fonctionnement du dispositif publicitaire. Ce dernier devra se conformer au croquis présenté et côté au Client.
+			Axo Top Média assure l’installation, l’entretien, la surveillance et la bonne marche de l’installation. Tout dépannage ou toute réparation sont à la charge d’Axo Top Média. Cependant, Axo Top Média ne peut être tenu responsable des vices ou pannes pouvant survenir sur le matériel commandé et mis à sa disposition par le Client ou par les propres fournisseurs de ce dernier et ce durant la durée complète de l’affichage.
+			Axo top média prendra en charge l’intégralité des frais du matériel nécessaire à la fabrication et à la pose du dispositif publicitaire et de ses accessoires. L’ensemble de ces dépenses étant à sa charge, Axo Top Média demeure propriétaire de l’installation, exception faite de la bâche qui reste la propriété du Client. La totalité de l’installation (éléments fixes) demeure donc la propriété d’Axo Top Média qui pourra en disposer à son gré à l’expiration de l’abonnement ou en cas de résiliation anticipée de la part de l’annonceur. Le Client n’aura pas à participer aux frais de dépose et de conservation.
+			Axo top média est assuré et est le seul exposé au cas où la responsabilité civile du Client serait engagée du fait de la pose, de l’entretien du montage/démontage ou du fonctionnement du dispositif durant la période louée.
+			Axo Top Média pourra sous-traiter une partie de d’exécution de l’abonnement à la condition qu’il en conserve l’entière responsabilité.
+			Dans le cas ou Axo Top Média ne serait pas en mesure d’afficher à un emplacement dans les délais prévus, le Client en sera immédiatement informé et une nouvelle date sera fixée. La durée de l’abonnement sera respectée. Toutefois, si le retard d’affichage d’Axo Top Média devait excéder dix pourcent (10%) de la durée de conservation prévue, le montant de l’ordre sera diminué proportionnellement sans que cela ne puisse entrainer une annulation de la commande.
+			Dans des cas exceptionnels ou l’affichage serait impossible le jour prévu tel que grèves, conditions atmosphériques, manifestations sur la voie publique ou autre, Axo Top Média s’engage à procéder à l’affichage les jours suivants. Un avenant au présent contrat serait alors établi décalant la durée de la prestation au prorata du nombre de jours de retards d’affichage.
+			En cas d’arrêt du fonctionnement des parties électriques, la réparation sera assurée dans un délais maximal de soixante-douze (72) heures et ce, sans que Axo Top Média ne consente à une diminution du prix convenu avec le Client. Les réclamations seront prises en considération par Axo Top Média si elles sont consécutives à un contrôle effectué conjointement par le Client et Axo Top Média et ce, durant la période de l’abonnement.
+			</p>
+			<strong>ENGAGEMENTS DU BENEFICIAIRE</strong><br/>
+			<p align="justify">
+			La conception de l’affiche est à la charge exclusive du Client. Ce dernier s’engage à fournir au prestataire le modèle prêt à l’impression. Le Client fournira le fichier sur support informatique au format arrêté d’un commun accord entre les deux parties une semaine (1) au moins avant la date prévue du départ de la campagne publicitaire. Le défaut total ou partiel de la livraison du matériel, maquettes et/ou fichiers dans ce délais ne pourra en aucun cas empêcher l’ordre de courir et ne pourra en aucun cas donner lieu à une prorogation du contrat.
+			Le matériel fourni par le Client est considéré comme abandonné à Axo Top Média en l’absence d’une demande expresse du Client dans un délais de quinze (15) jours après le début de la période d’abonnement.
+			Axo Top Média se réserve dans tous les cas les droits de la propriété intellectuelle pour les produits, esquisses, dessins, profilés etc. réalisé par ses soins. Toute reproduction ou utilisation présentées au Client par Axo Top Média, que celles-ci soient utilisées ou non, sont interdites sans autorisation écrite préalable d’Axo Top Média.
+			Le Client est tenu de régler les redevances s’achat d’espace selon les modalités détaillées de l’article 4 du présent contrat. Le Client est tenu de régler les impressions, les poses et les déposes des visuels supplémentaires à l’exécution des travaux tel que stipulé dans l’article 3 du présent contrat.
+			A l’échéance du présent contrat, le Client se réserve le droit de récupérer les bâches dont il est le propriétaire. Il devra en faire la demande par écrit quinze (15) jours avant la date d’échéance du présent contrat. 
+			Dans le cas d’une mise en redressement judiciaire ou d’une liquidation des biens du Client, ces cas entraineront de plein droit la résiliation de l’engagement souscrit. Les factures en cours et non encore payées deviendraient immédiatement exigibles.
+	   		</p>
+			<strong>RESILIATION AVANT TERME ET JURIDICTION</strong><br/>
+			<p align="justify">   		
+			En cas de non-respect par l’une ou l’autre des deux parties contractantes, le présent contrat peut être résilié de plein droit avec préavis. La résiliation devra se faire par simple lettre recommandée avec accusé de réception. 
+			Par le Client : ce dernier s’engage à régler le montant des factures restant à payer pour les services donnés par Axo Top Média jusqu’à la date de résiliation. 
+			Par Axo Top Média : ce dernier s’engage à rembourser au Client le montant correspondant aux services non effectués au prorata de la période de non affichage.
+			En cas de litige concernant l’exécution ou l’interprétation du présent contrat, les Tribunaux de Casablanca seront seuls compétents.
+			Toutefois, si l’enregistrement se révélait indispensable à une occasion quelconque, les frais qui en résulteraient seraient à la charge des parties qui l’auraient rendu nécessaire.
+			</p>  		
+	   	</div> 
+   		
+        </div>
+        </t>
+    </t>
+</template>
+
+</odoo>

@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_registration_registration_user,registration.registration,model_registration_registration,group_user,1,1,1,0
+access_registration_claim_user,claim.claim,model_claim_claim,group_user,1,1,1,0
+access_registration_level_user,level.level,model_level_level,group_user,1,1,1,0
+access_registration_cucle_user,cycle.cycle,model_cycle_cycle,group_user,1,1,1,0
+
+access_registration_registration_manager,registration.registration,model_registration_registration,group_manager,1,1,1,1
+access_registration_claim_manager,claim.claim,model_claim_claim,group_manager,1,1,1,1
+access_registration_level_manager,level.level,model_level_level,group_manager,1,1,1,1
+access_registration_cucle_manager,cycle.cycle,model_cycle_cycle,group_manager,1,1,1,1
