@@ -20,8 +20,7 @@
     'data': [
         'views/sdc_views.xml',
         'views/sdc_inherit.xml',
-        'data/data.xml',
-        #'menu.xml',
+        'data/data.xml'
     ],
     
     'css': [

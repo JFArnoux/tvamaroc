@@ -82,4 +82,6 @@
             <field name="expense_def">0</field>
             <field name="prohibit">0</field>
         </record>
+        
+    
 </odoo>

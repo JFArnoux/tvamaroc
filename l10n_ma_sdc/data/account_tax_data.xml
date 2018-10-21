@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- account chart  -->
+    <record id="l10n_kzc_temp_chart" model="account.chart.template">
+        <field name="property_account_receivable_id" ref="pcg_34211"/>
+        <field name="property_account_payable_id" ref="pcg_4411"/>
+        <field name="property_account_income_categ_id" ref="pcg_7111"/>
+        <field name="property_account_expense_categ_id" ref="pcg_1486"/>
+        <field name="income_currency_exchange_account_id" ref="pcg_733"/>
+        <field name="expense_currency_exchange_account_id" ref="pcg_633"/>
+    </record>
+
+	<!-- account.group -->
+    <record id="account_group_01" model="account.group">
+        <field name="name">Amortissement des immobilisations</field>
+    </record>
+    <record id="account_group_02" model="account.group">
+        <field name="name">Autres comptes spéciaux</field>
+    </record>
+    <record id="account_group_03" model="account.group">
+        <field name="name">Autres provisions pour risques et charges</field>
+    </record>  
+    <record id="account_group_04" model="account.group">
+        <field name="name">Bilan d'ouverture</field>
+    </record>
+    <record id="account_group_05" model="account.group">
+        <field name="name">Capitaux propres</field>
+    </record>
+    <record id="account_group_06" model="account.group">
+        <field name="name">Capitaux propres et assimilés</field>
+    </record>  
+    <record id="account_group_07" model="account.group">
+        <field name="name">Charges d'exploitation</field>
+    </record>
+    <record id="account_group_08" model="account.group">
+        <field name="name">Charges financières</field>
+    </record>
+    <record id="account_group_09" model="account.group">
+        <field name="name">Charges non courantes</field>
+    </record>  
+    <record id="account_group_10" model="account.group">
+        <field name="name">Clôture du bilan</field>
+    </record>
+    <record id="account_group_11" model="account.group">
+        <field name="name">Comptes de liaison des établissements et succursales</field>
+    </record>
+    <record id="account_group_12" model="account.group">
+        <field name="name">Comptes de liaisons internes</field>
+    </record>  
+    <record id="account_group_13" model="account.group">
+        <field name="name">Comptes de produits et charges réfléchis</field>
+    </record>
+    <record id="account_group_14" model="account.group">
+        <field name="name">Comptes de reclassement et d'analyse (ouverts et attribués</field>
+    </record>
+    <record id="account_group_15" model="account.group">
+        <field name="name">Selon les nécessités de l'entreprise</field>
+    </record>  
+    <record id="account_group_16" model="account.group">
+        <field name="name">Comptes d'ordre</field>
+    </record>
+    <record id="account_group_17" model="account.group">
+        <field name="name">Coûts d'achat ou de production</field>
+    </record>
+    <record id="account_group_18" model="account.group">
+        <field name="name">Coûts de revient</field>
+    </record>  
+    <record id="account_group_19" model="account.group">
+        <field name="name"> Créances de l'actif circulant</field>
+    </record>      
+    <record id="account_group_20" model="account.group">
+        <field name="name">Dettes de financement </field>
+    </record> 
+    <record id="account_group_21" model="account.group">
+        <field name="name">Dettes du passif circulant </field>
+    </record> 
+    <record id="account_group_22" model="account.group">
+        <field name="name">Différence d'incorporation </field>
+    </record>      
+    <record id="account_group_23" model="account.group">
+        <field name="name">Ecarts de conversion - Actif </field>
+    </record> 
+    <record id="account_group_24" model="account.group">
+        <field name="name">Ecarts de conversion - Actif (éléments circulants) </field>
+    </record>  
+     <record id="account_group_25" model="account.group">
+        <field name="name">Ecarts de conversion - Passif </field>
+    </record>      
+    <record id="account_group_26" model="account.group">
+        <field name="name">Ecarts de conversion - Passif (éléments circulants) </field>
+    </record> 
+    <record id="account_group_27" model="account.group">
+        <field name="name">Ecarts sur coûts de revient préétablis </field>
+    </record> 
+    <record id="account_group_28" model="account.group">
+        <field name="name">Engagements donnés </field>
+    </record>      
+    <record id="account_group_29" model="account.group">
+        <field name="name">Engagements reçus </field>
+    </record> 
+    <record id="account_group_30" model="account.group">
+        <field name="name">Engagements sur opérations de crédit-bail </field>
+    </record>     
+    <record id="account_group_31" model="account.group">
+        <field name="name">Immobilisations en non valeurs</field>
+    </record> 
+    <record id="account_group_32" model="account.group">
+        <field name="name">Immobilisations financières</field>
+    </record>     
+    <record id="account_group_33" model="account.group">
+        <field name="name">Immobilisations incorporelles</field>
+    </record> 
+    <record id="account_group_34" model="account.group">
+        <field name="name">Impôts sur le résultat</field>
+    </record>
+    <record id="account_group_35" model="account.group">
+        <field name="name">Inventaire permanent des stocks</field>
+    </record> 
+    <record id="account_group_36" model="account.group">
+        <field name="name">Produits d'exploitation</field>
+    </record>
+    <record id="account_group_37" model="account.group">
+        <field name="name">Produits financiers</field>
+    </record> 
+    <record id="account_group_38" model="account.group">
+        <field name="name">Produits non courants</field>
+    </record>   
+    <record id="account_group_39" model="account.group">
+        <field name="name">Provision pour dépréciation des comptes de l'actif circulant</field>
+    </record> 
+    <record id="account_group_40" model="account.group">
+        <field name="name">Provisions durables pour risques et charges</field>
+    </record>     
+    <record id="account_group_41" model="account.group">
+        <field name="name">Provisions pour dépréciation des comptes de trésorerie</field>
+    </record> 
+    <record id="account_group_42" model="account.group">
+        <field name="name">Provisions pour dépréciation des immobilisations</field>
+    </record>
+    <record id="account_group_43" model="account.group">
+        <field name="name">Résultat après impôt</field>
+    </record> 
+    <record id="account_group_44" model="account.group">
+        <field name="name">Résultat avant impôt</field>
+    </record>
+    <record id="account_group_45" model="account.group">
+        <field name="name">Résultat courant</field>
+    </record> 
+    <record id="account_group_46" model="account.group">
+        <field name="name">Résultat d'exploitation</field>
+    </record> 
+     <record id="account_group_47" model="account.group">
+        <field name="name">Résultat financier</field>
+    </record> 
+    <record id="account_group_48" model="account.group">
+        <field name="name">Résultat non courant</field>
+    </record>     
+    <record id="account_group_49" model="account.group">
+        <field name="name">Résultats analytiques</field>
+    </record> 
+    <record id="account_group_50" model="account.group">
+        <field name="name">Sections Analytiques</field>
+    </record>
+    <record id="account_group_51" model="account.group">
+        <field name="name">Stocks</field>
+    </record> 
+    <record id="account_group_52" model="account.group">
+        <field name="name">Titres et valeurs de placement</field>
+    </record>
+    <record id="account_group_53" model="account.group">
+        <field name="name">Trésorerie - Actif</field>
+    </record> 
+    <record id="account_group_54" model="account.group">
+        <field name="name">Trésorerie - Passif</field>
+    </record>
+    
+    <!-- Account Tags -->
+    <record id="tax_tag_01" model="account.account.tag">
+        <field name="name">TVA 20% VENTES</field>
+        <field name="applicability">taxes</field>
+    </record>
+    <record id="tax_tag_02" model="account.account.tag">
+        <field name="name">TVA 14% VENTES</field>
+        <field name="applicability">taxes</field>
+    </record>
+    <record id="tax_tag_03" model="account.account.tag">
+        <field name="name">TVA 10% VENTES</field>
+        <field name="applicability">taxes</field>
+    </record>
+    <record id="tax_tag_04" model="account.account.tag">
+        <field name="name">TVA 7% VENTES</field>
+        <field name="applicability">taxes</field>
+    </record>
+    <record id="tax_tag_05" model="account.account.tag">
+        <field name="name">TVA 10% ACHATS</field>
+        <field name="applicability">taxes</field>
+    </record>
+    <record id="tax_tag_06" model="account.account.tag">
+        <field name="name">TVA 20% ACHATS</field>
+        <field name="applicability">taxes</field>
+    </record>
+    <record id="tax_tag_07" model="account.account.tag">
+        <field name="name">TVA 14% ACHATS</field>
+        <field name="applicability">taxes</field>
+    </record>
+    <record id="tax_tag_08" model="account.account.tag">
+        <field name="name">TVA 7% ACHATS</field>
+        <field name="applicability">taxes</field>
+    </record>
+    <record id="tax_tag_09" model="account.account.tag">
+        <field name="name">TVA 20% ACHATS (immobilisation)</field>
+        <field name="applicability">taxes</field>
+    </record>
+
+  <!-- Account Tax Template -->
+  <record model="account.tax.template" id="tva_exo">
+    <field name="name">Exonere de TVA VENTES</field>
+    <field name="description">Exonere de TVA VENTES</field>
+    <field name="type_tax_use">sale</field>
+    <field name="refund_account_id"/>
+    <field name="account_id"/>
+    <field name="amount">0</field>
+    <field name="amount_type">percent</field>
+    <field name="chart_template_id" ref="l10n_kzc_temp_chart"/>
+    <field name="tax_group_id" ref="tax_group_tva_0"/>
+  </record>
+  <record model="account.tax.template" id="tva_exo1">
+    <field name="name">Exonere de TVA ACHATS</field>
+    <field name="description">Exonere de TVA ACHATS</field>
+    <field name="type_tax_use">purchase</field>
+    <field name="refund_account_id"/>
+    <field name="account_id"/>
+    <field name="amount">0</field>
+    <field name="amount_type">percent</field>
+    <field name="chart_template_id" ref="l10n_kzc_temp_chart"/>
+    <field name="tax_group_id" ref="tax_group_tva_0"/>
+  </record>
+  <record model="account.tax.template" id="tva_vt20">
+    <field name="name">TVA 20% VENTES</field>
+    <field name="description">TVA 20% VENTES</field>
+    <field name="type_tax_use">sale</field>
+    <field name="refund_account_id" ref="pcg_445520"/>
+    <field name="account_id" ref="pcg_445520"/>
+    <field name="amount">20</field>
+    <field name="amount_type">percent</field>
+    <field name="chart_template_id" ref="l10n_kzc_temp_chart"/>
+    <field name="tag_ids" eval="[(6,0,[ref('tax_tag_01')])]"/>
+    <field name="tax_group_id" ref="tax_group_tva_20"/>
+  </record>
+  <record model="account.tax.template" id="tva_vt14">
+    <field name="name">TVA 14% VENTES</field>
+    <field name="description">TVA 14% VENTES</field>
+    <field name="type_tax_use">sale</field>
+    <field name="refund_account_id" ref="pcg_445514"/>
+    <field name="account_id" ref="pcg_445514"/>
+    <field name="amount">14</field>
+    <field name="amount_type">percent</field>
+    <field name="chart_template_id" ref="l10n_kzc_temp_chart"/>
+    <field name="tag_ids" eval="[(6,0,[ref('tax_tag_02')])]"/>
+    <field name="tax_group_id" ref="tax_group_tva_14"/>
+  </record>
+  <record model="account.tax.template" id="tva_vt10">
+    <field name="name">TVA 10% VENTES</field>
+    <field name="description">TVA 10% VENTES</field>
+    <field name="type_tax_use">sale</field>
+    <field name="refund_account_id" ref="pcg_445510"/>
+    <field name="account_id" ref="pcg_445510"/>
+    <field name="amount">10</field>
+    <field name="amount_type">percent</field>
+    <field name="chart_template_id" ref="l10n_kzc_temp_chart"/>
+    <field name="tag_ids" eval="[(6,0,[ref('tax_tag_03')])]"/>
+    <field name="tax_group_id" ref="tax_group_tva_10"/>
+  </record>
+  <record model="account.tax.template" id="tva_vt07">
+    <field name="name">TVA 7% VENTES</field>
+    <field name="description">TVA 7% VENTES</field>
+    <field name="type_tax_use">sale</field>
+    <field name="refund_account_id" ref="pcg_445507"/>
+    <field name="account_id" ref="pcg_445507"/>
+    <field name="amount">7</field>
+    <field name="amount_type">percent</field>
+    <field name="chart_template_id" ref="l10n_kzc_temp_chart"/>
+    <field name="tag_ids" eval="[(6,0,[ref('tax_tag_04')])]"/>
+    <field name="tax_group_id" ref="tax_group_tva_7"/>
+  </record>
+  <record model="account.tax.template" id="tva_ac20">
+    <field name="name">TVA 20% ACHATS</field>
+    <field name="description">TVA 20% ACHATS</field>
+    <field name="type_tax_use">purchase</field>
+    <field name="refund_account_id" ref="pcg_3455220"/>
+    <field name="account_id" ref="pcg_3455220"/>
+    <field name="amount">20</field>
+    <field name="amount_type">percent</field>
+    <field name="chart_template_id" ref="l10n_kzc_temp_chart"/>
+    <field name="tag_ids" eval="[(6,0,[ref('tax_tag_06')])]"/>
+    <field name="tax_group_id" ref="tax_group_tva_20"/>
+  </record>
+  <record model="account.tax.template" id="tva_acim">
+    <field name="name">TVA 20% ACHATS (immobilisation)</field>
+    <field name="description">TVA 20% ACHATS (immobilisation)</field>
+    <field name="type_tax_use">purchase</field>
+    <field name="refund_account_id" ref="pcg_34551"/>
+    <field name="account_id" ref="pcg_34551"/>
+    <field name="amount">20</field>
+    <field name="amount_type">percent</field>
+    <field name="chart_template_id" ref="l10n_kzc_temp_chart"/>
+    <field name="tag_ids" eval="[(6,0,[ref('tax_tag_09')])]"/>
+    <field name="tax_group_id" ref="tax_group_tva_20"/>
+  </record>
+  <record model="account.tax.template" id="tva_ac14">
+    <field name="name">TVA 14% ACHATS</field>
+    <field name="description">TVA 14% ACHATS</field>
+    <field name="type_tax_use">purchase</field>
+    <field name="refund_account_id" ref="pcg_3455214"/>
+    <field name="account_id" ref="pcg_3455214"/>
+    <field name="amount">14</field>
+    <field name="amount_type">percent</field>
+    <field name="chart_template_id" ref="l10n_kzc_temp_chart"/>
+    <field name="tag_ids" eval="[(6,0,[ref('tax_tag_07')])]"/>
+    <field name="tax_group_id" ref="tax_group_tva_14"/>
+  </record>
+  <record model="account.tax.template" id="tva_ac10">
+    <field name="name">TVA 10% ACHATS</field>
+    <field name="description">TVA 10% ACHATS</field>
+    <field name="type_tax_use">purchase</field>
+    <field name="refund_account_id" ref="pcg_3455210"/>
+    <field name="account_id" ref="pcg_3455210"/>
+    <field name="amount">10</field>
+    <field name="amount_type">percent</field>
+    <field name="chart_template_id" ref="l10n_kzc_temp_chart"/>
+    <field name="tag_ids" eval="[(6,0,[ref('tax_tag_05')])]"/>
+    <field name="tax_group_id" ref="tax_group_tva_10"/>
+  </record>
+  <record model="account.tax.template" id="tva_ac07">
+    <field name="name">TVA 7% ACHATS</field>
+    <field name="description">TVA 7% ACHATS</field>
+    <field name="type_tax_use">purchase</field>
+    <field name="refund_account_id" ref="pcg_3455207"/>
+    <field name="account_id" ref="pcg_3455207"/>
+    <field name="amount">7</field>
+    <field name="amount_type">percent</field>
+    <field name="chart_template_id" ref="l10n_kzc_temp_chart"/>
+    <field name="tag_ids" eval="[(6,0,[ref('tax_tag_08')])]"/>
+    <field name="tax_group_id" ref="tax_group_tva_7"/>
+  </record>
+</odoo>

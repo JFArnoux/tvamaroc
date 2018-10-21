@@ -47,13 +47,14 @@ class TypLiasee(models.Model):
     
 class Partner(models.Model):
     _inherit = 'res.partner' 
-    
+       
     rc = fields.Char(string='Registre du commerce')
     tc = fields.Char(string='Tribunal de commerce')
     ifs = fields.Char(string='Identifiant Fiscal')
     patente = fields.Char(string='Patente')
     ice = fields.Char(string='I.C.E')
     description_facture = fields.Char(string='Description facture')
+    
 
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
@@ -141,9 +142,31 @@ class AccountTax(models.Model):
 class ProductTemplate(models.Model):
     _inherit = 'product.template'   
     #teype_vent=fields.Char(string='Ventilation')
-    teype_vent = fields.Char(string='Ventilation', related='taxes_id.teype_vent', readonly=True)
+    teype_vent = fields.Char(compute='_get_code',string='Ventilation', readonly=True, store=True)
     
     
-        
+    @api.multi
+    @api.depends('supplier_taxes_id')
+    def _get_code(self):
+        data =[]
+        for t in self.supplier_taxes_id:
+            data.append(t.code_dgi+'-'+t.teype_vent)
+        self.teype_vent = (', '.join(map(str, data)))
+        return True
+
+class ProductProduct(models.Model):
+    _inherit = 'product.product'   
+    #teype_vent=fields.Char(string='Ventilation')
+    teype_vent = fields.Char(compute='_get_code_dgi',string='Ventilation', readonly=True, store=True)
     
-            
+    
+    @api.multi
+    @api.depends('supplier_taxes_id')
+    def _get_code_dgi(self):
+        data =[]
+        for t in self.supplier_taxes_id:
+            data.append(t.code_dgi+'-'+t.teype_vent)
+        self.teype_vent = (', '.join(map(str, data)))
+        return True    
+    
+          
