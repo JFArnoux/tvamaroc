@@ -15,7 +15,7 @@
             - model2
             - model3
     """,
-    'depends': ['base','mail','sale','account'],
+    'depends': ['base','mail','sale','account','purchase','hr_expense'],
     'summary': 'sale, purchase',
     'data': [
         'views/sdc_views.xml',
