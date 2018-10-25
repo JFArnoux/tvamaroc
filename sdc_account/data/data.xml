@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+<data noupdate="0">
 		<!-- demo data for type liasse -->
         <record id="type_liasse_1" model="type.liasse">
-            <field name="name">Comptable normal</field>
+            <field name="name">Normal</field>
             <field name="identifiant">1</field>
-            <field name="type">Normal</field>
+            <field name="type">Comptable normal</field>
         </record>
 
         <record id="type_liasse_2" model="type.liasse">
-            <field name="name">Comptable Simplifié</field>
+            <field name="name">Simplifié</field>
             <field name="identifiant">7</field>
-            <field name="type">Simplifié</field>
+            <field name="type">Comptable Simplifié</field>
         </record>
 
         <record id="type_liasse_3" model="type.liasse">
@@ -28,60 +29,39 @@
         <!-- data for payment modes -->
         <record id="payment_mode_1" model="payment.mode">
             <field name="name">Espèces</field>
-            <field name="code">1</field>
-            <field name="partner_def">0</field>
             <field name="supplier_def">0</field>
-            <field name="expense_def">0</field>
             <field name="prohibit">0</field>
         </record>   
         <record id="payment_mode_2" model="payment.mode">
             <field name="name">Chèque</field>
-            <field name="code">2</field>
-            <field name="partner_def">1</field>
             <field name="supplier_def">1</field>
-            <field name="expense_def">1</field>
             <field name="prohibit">0</field>
         </record>    
         <record id="payment_mode_3" model="payment.mode">
             <field name="name">Prélèvement</field>
-            <field name="code">3</field>
-            <field name="partner_def">0</field>
             <field name="supplier_def">0</field>
-            <field name="expense_def">0</field>
             <field name="prohibit">0</field>
         </record>   
         <record id="payment_mode_4" model="payment.mode">
             <field name="name">Virement</field>
-            <field name="code">4</field>
-            <field name="partner_def">0</field>
             <field name="supplier_def">0</field>
-            <field name="expense_def">0</field>
             <field name="prohibit">0</field>
         </record>
         <record id="payment_mode_5" model="payment.mode">
             <field name="name">Effet</field>
-            <field name="code">5</field>
-            <field name="partner_def">0</field>
             <field name="supplier_def">0</field>
-            <field name="expense_def">0</field>
             <field name="prohibit">0</field>
         </record>   
         <record id="payment_mode_6" model="payment.mode">
             <field name="name">Compensation</field>
-            <field name="code">6</field>
-            <field name="partner_def">0</field>
             <field name="supplier_def">0</field>
-            <field name="expense_def">0</field>
             <field name="prohibit">0</field>
         </record>
         <record id="payment_mode_7" model="payment.mode">
             <field name="name">Autres</field>
-            <field name="code">7</field>
-            <field name="partner_def">0</field>
             <field name="supplier_def">0</field>
-            <field name="expense_def">0</field>
             <field name="prohibit">0</field>
         </record>
         
-    
+   </data> 
 </odoo>

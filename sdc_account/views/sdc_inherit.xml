@@ -184,6 +184,9 @@
                	<xpath expr="//field[@name='supplier_taxes_id']" position="after">
 		            <field name="teype_vent"/>
 		        </xpath> 
+		        <xpath expr="//field[@name='taxes_id']" position="after">
+		            <field name="teype_vent_sale"/>
+		        </xpath>
             </field>
         </record>
  

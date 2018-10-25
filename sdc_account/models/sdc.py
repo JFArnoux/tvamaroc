@@ -18,7 +18,7 @@ class ResCompany(models.Model):
     itp = fields.Char(string='Patente')
     ice = fields.Char(string='I.C.E')
     cnss = fields.Char(string='CNSS')  
-    idfp = fields.Char(string='Identifiant tax professionnelle')
+    idfp = fields.Char(string='Identifiant Taxe Professionnelle')
     drp = fields.Char(string='Direction régionale ou préfectorale')
     subdivision = fields.Char(string='Subdivision')
     code_dr = fields.Char(string='Code DR ou DP')
@@ -31,7 +31,7 @@ class ResCompany(models.Model):
     raison_s = fields.Char(string='Raison sociale') 
     fj = fields.Char(string='Forme juridique')
     adresse_siege = fields.Char(string='Adresse du siège')
-    city_id = fields.Char(string='Ville du diège')
+    city_id = fields.Char(string='Ville du siège')
     
     type_lf = fields.Many2one('type.liasse', string= 'Type de liasse fiscale')
     invoice_description = fields.Char(string='Description factures vente par défaut')
@@ -68,10 +68,7 @@ class PaymentMode(models.Model):
     _name = 'payment.mode'
      
     name=fields.Char(string='Mode de paiement', required=True)
-    code=fields.Char(string='Code DGI', required=True)
-    partner_def=fields.Boolean(string='Par défaut encaissements clients')
     supplier_def=fields.Boolean(string='Par défaut règlements fournisseurs')
-    expense_def=fields.Boolean(string='Par défaut remboursement notes de frais')
     prohibit=fields.Boolean(string='Interdire')
  
 class AccountPayment(models.Model):
@@ -143,30 +140,42 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'   
     #teype_vent=fields.Char(string='Ventilation')
     teype_vent = fields.Char(compute='_get_code',string='Ventilation', readonly=True, store=True)
-    
+    teype_vent_sale = fields.Char(compute='_get_type_ventsal',string='Ventilation', readonly=True, store=True)
     
     @api.multi
     @api.depends('supplier_taxes_id')
     def _get_code(self):
         data =[]
-        for t in self.supplier_taxes_id:
-            data.append(t.code_dgi+'-'+t.teype_vent)
-        self.teype_vent = (', '.join(map(str, data)))
-        return True
-
+        if self.supplier_taxes_id:      
+            for t in self.supplier_taxes_id:
+                data.append(str(t.code_dgi)+'-'+str(t.teype_vent))
+            self.teype_vent = (', '.join(map(str, data)))
+        else:pass
+    
+    @api.multi
+    @api.depends('taxes_id')
+    def _get_type_ventsal(self):
+        data =[]
+        if self.taxes_id:    
+            for t in self.taxes_id:
+                data.append(str(t.code_dgi)+'-'+str(t.teype_vent))
+            self.teype_vent_sale = (', '.join(map(str, data))) 
+        else:pass
+            
 class ProductProduct(models.Model):
     _inherit = 'product.product'   
     #teype_vent=fields.Char(string='Ventilation')
     teype_vent = fields.Char(compute='_get_code_dgi',string='Ventilation', readonly=True, store=True)
     
     
+    
     @api.multi
     @api.depends('supplier_taxes_id')
-    def _get_code_dgi(self):
+    def _get_code_dgi(self):  
         data =[]
         for t in self.supplier_taxes_id:
-            data.append(t.code_dgi+'-'+t.teype_vent)
+            data.append(str(t.code_dgi)+'-'+str(t.teype_vent))
         self.teype_vent = (', '.join(map(str, data)))
-        return True    
     
+        return True 
           
