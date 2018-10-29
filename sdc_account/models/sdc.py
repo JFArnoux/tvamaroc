@@ -185,6 +185,8 @@ class ProductProduct(models.Model):
 class AccountBankStatementLine(models.Model):
     _inherit = "account.bank.statement.line"
     
+    payment_mode = fields.Many2one('payment.mode',string='Mode de paiement', required=True)
+    
     def process_reconciliation(self, counterpart_aml_dicts=None, payment_aml_rec=None, new_aml_dicts=None):
         """ Match statement lines with existing payments (eg. checks) and/or payables/receivables (eg. invoices and credit notes) and/or new move lines (eg. write-offs).
             If any new journal item needs to be created (via new_aml_dicts or counterpart_aml_dicts), a new journal entry will be created and will contain those
@@ -279,7 +281,7 @@ class AccountBankStatementLine(models.Model):
                     'partner_type': partner_type,
                     'journal_id': self.statement_id.journal_id.id,
                     'payment_date': self.date,
-                    'payment_mode': 1,
+                    'payment_mode': self.payment_mode and self.payment_mode.id or False,
                     'state': 'reconciled',
                     'currency_id': currency.id,
                     'amount': abs(total),
